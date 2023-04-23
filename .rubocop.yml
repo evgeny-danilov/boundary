@@ -1,0 +1,20 @@
+AllCops:
+  TargetRubyVersion: 2.7
+  NewCops: enable
+Layout/EmptyLinesAroundClassBody:
+  Description: Keeps track of empty lines around class bodies.
+  Enabled: true
+  EnforcedStyle: empty_lines
+  SupportedStyles:
+    - empty_lines
+    - no_empty_lines
+Layout/LineLength:
+  Max: 120
+RSpec/MultipleExpectations:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/HashSyntax:
+  Enabled: false
+
+require: rubocop-rspec
