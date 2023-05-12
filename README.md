@@ -1,6 +1,10 @@
 # Boundary
 
-`Boundary` is a Ruby gem that provides a set of tools to help building robust and scalable applications. It includes features such as:
+Building a big application in Ruby requires separation business domain logic from the MVC to a separate layer, usually called `Services` or `Domains`. Unfortunately, these is no a standard of organazing this layer, so every project reinvent their own wheels.
+
+`Boundary` is a Ruby gem that provides a set of tools to help building robust and scalable applications, by enforcing developers follow the architectural rules. 
+
+The gem includes features such as:
 
 - **Enforcing boundary contexts:** Gem provides a flexible framework that allows you to implement code namespaces with public interface and truly hidden implementation.
 - **Configuration management:** Gem makes it easy to manage configuration settings for the application depends on project's best practices, so as to keep the codebase style consistent across the whole project.
@@ -9,6 +13,22 @@
 The gem tends to be **framework-agnostic**, which in particular means it can be applied in RubyOnRails, Hanami, and some other Ruby frameworks. However, there is one limitation - `Boundary` relies on `Zeitwerk` loader behaviour, so the framework should support it (other loaders might work not in 100% cases, so you should check it by yourself).
 
 Gem `Boundary` was built according to the principle of **"Least Surprise"**, which means avoiding metaprogramming as much as possible, and use direct refers for classes as methods.
+
+Imagine you have a namespace to be isolated from other parts of the code:
+```ruby
+module MyNamespace
+  class DoSomething
+    def call
+      # do something
+    end
+  end
+  
+  class Subactions
+    # some inner code
+  end
+end
+```
+where `DoSomething` called somewhere else in the code, while `Subactions` is a private implementation for internal usage inside the `MyNamespace` only. 
 
 ## Installation
 
@@ -26,7 +46,11 @@ gem install boundary
 
 ## Usage
 
-Imagine you have a namespace to be isolated from other parts of the code:
+```ruby
+Boundary.initialize do |config|
+  config.defined_namespaces = [MyNamespace::Facade]
+end
+```
 
 ```ruby
 module MyNamespace
@@ -61,9 +85,6 @@ After that you can use the public interface outside:
 ```ruby
 MyNamespace::Facade.do_something(params)
 ```
-
-Note that naming `Facade` is configurable, and you can use your own naming across the project.
-Check the section "Configuration" for details.
 
 #### Accessing any inner class will cause an error
 
@@ -151,7 +172,7 @@ _** Hopefully, Ractors will become a solid part of the Ruby language, and step-b
 
 ## TODO LIST
 
-1. Check how Zeitwerk works with namespaces
+1. Implement the DSL instruction for tests, to expose some 
 2. Check if we can freeze Facade class without drawbacks
 3. Extract it in a Gem
 4. Check the EPAM open source contributions program

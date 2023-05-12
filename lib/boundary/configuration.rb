@@ -7,7 +7,10 @@ class Boundary
 
     extend ::Dry::Configurable
 
-    setting :defined_namespaces, default: [], constructor: proc { |values| values.map(&:freeze) }
+    # STRATEGIES = [ByTracePoints, ByPrivateConstants]
+    # setting :strategy, default: :by_trace_points, constructor: proc { |value| value # TODO }
+
+    setting :defined_namespaces, default: Set.new, constructor: proc { |values| Set.new(values.map(&:freeze)) }
     setting :const_get_receive_only_public_constants, default: true
     setting :allowed_class_names_for_facade, default: ['Facade']
     setting :callable_dsl_methods, default: [:has_use_case]

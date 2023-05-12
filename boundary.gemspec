@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-# TODO: check the file
-#
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'boundary/version'
+
+require 'boundary'
 
 Gem::Specification.new do |spec|
   spec.name = 'boundary'
@@ -12,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.authors = ['Evgenii Danilov']
   spec.email = ['evgenii_danilov@epam.com']
 
-  spec.summary = 'The tool to enforce the boundaries between Ruby namespaces, by using public api (facade)'
+  spec.summary = 'The tool to enforce boundaries between Ruby namespaces, by using public api (facade)'
   spec.description = spec.summary
   spec.homepage = 'https://github.com/evgeny-danilov/boundary'
   spec.license = 'MIT'
@@ -35,6 +34,7 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'dry-configurable', '>=0.14'
+  spec.add_runtime_dependency 'dry-configurable', '>=1.0.1'
+  spec.add_runtime_dependency 'zeitwerk', '~>2.6'
   spec.metadata['rubygems_mfa_required'] = 'true'
 end

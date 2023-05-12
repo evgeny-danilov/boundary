@@ -12,7 +12,7 @@ class Boundary
 
     def call
       raise Errors::WrongFacadeClassNameError if invalid_facade_name?
-      raise Errors::WrongNamespaceError if config.frozen? && !config.defined_namespaces.include?(facade)
+      raise Errors::WrongNamespaceError if !config.defined_namespaces.include?(facade.to_s)
 
       privatize_initializer
       privatize_inner_classes
