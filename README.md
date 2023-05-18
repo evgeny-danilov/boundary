@@ -1,6 +1,6 @@
 # Boundary
 
-Building a big application in Ruby requires separation business domain logic from the MVC to a separate layer, usually called `Services` or `Domains`. Unfortunately, these is no a standard of organazing this layer, so every project reinvent their own wheels.
+Building a big application in Ruby requires separation business domain logic from the MVC to a separate layer, usually called `Services` or `Domains`. Unfortunately, these are no standards of organazing this layer, so every project reinvent their own wheels.
 
 `Boundary` is a Ruby gem that provides a set of tools to help building robust and scalable applications, by enforcing developers to follow the architectural rules.
 
@@ -18,13 +18,13 @@ The gem stands of principles such as:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'boundary'
+gem 'boundary', source: 'https://github.com/evgeny-danilov/boundary'
 ```
 
 or install it directly:
 
-```ruby
-gem install boundary
+```bash
+gem install boundary --source https://github.com/evgeny-danilov/boundary
 ```
 
 ## Usage
@@ -139,26 +139,27 @@ But what if we get a set of strict rules that enforce us to follow the best prac
 - build-in restrictions to hide the implementation under the public interface
 - flexible configuration allows to set-up our own rules of designing the code.
 - for new project it provides a great tool to follow best code-design practices at the very beginning
-- for outdated projects it does not generate a big-bang, so we to gently refactor the code step-by-step
+- for existing projects it does not generate a big-bang, so as to gently refactor the code step-by-step
 
 For more information about the philosophy behind the tool check the article: TODO
 
 ## Alternatives
 
-In Ruby community there are various approach to solve the same problems:
+In Ruby community there are various approach to enforce good code organization:
 - building "best practices" guides and rely on engineering culture (does not work well in big teams)
 - using linters, such as Rubocop (quite hard to maintain, while engineers still can avoid restrictions by disabling rules locally)
 - `Rails Engines` or gems, such as [Facade](https://github.com/djberg96/facade) or [Caze](https://github.com/magnetis/caze) (do not provide true isolation, but only another level of abstractions)
 - Gem [https://github.com/shioyama/im](https://github.com/shioyama/im) (looks promising, but not yet ready for production)
-- **Ractors** model, which created for concurrent tasks, but can be also used to implement isolated namespaces (also looks promising, but still in the experimental phase)
+- **Ractors** model, which created for concurrent tasks, but can potentially be also used to implement isolated namespaces (also looks promising, but still in the experimental phase)
 
 ## TODO LIST
 
-1. Async calls through the facade?
-2. Check compatibility with old Ruby versions (probably, it will requite to get rid of dry-configurable)
-3. `has_use_case` and others should receive only classes (or lambdas as well, if appropriate settings are configured)
-4. Try to move to dry.rb libraries
-5. Add installer command so as to generate an initializer with explained configs in `config/initializers/` folder
+1. Publish to [rubygems.org](https://rubygems.org), in order to be able to install directly as 'gem install boundary'
+2. Async calls through the facade?
+3. Check compatibility with old Ruby versions (probably, it will requite to get rid of dry-configurable)
+4. `has_use_case` and others should receive only classes (or lambdas as well, if appropriate settings are configured)
+5. Try to move to dry.rb libraries
+6. Add installer command so as to generate an initializer with explained configs in `config/initializers/` folder
 
 ## Contribution
 
