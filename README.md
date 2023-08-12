@@ -130,6 +130,8 @@ TODO: check if we can do it right now.
 
 ## Philosophy
 
+**The human brain is always about find the easiest way to do things. So, the general idea is to organize code in that way, that following good design will be the simplest way among others.**
+
 Ruby is an incredibly flexible tool, which, however, provides too much freedom for developers. It is not a problem for small and middle projects with simply CRUD operations. However, when the project grows, it becomes harder to maintain the complexity, as the code turns into a big ball of mugs, where different parts of the code call each other in a random way, generating cyclic dependencies and a lot of legacy. This significantly increases the cost of further development.
 
 But what if we get a set of strict rules that enforce us to follow the best practices of designing domain logic? The `Boundary` gem is here for that!
@@ -154,12 +156,15 @@ In Ruby community there are various approach to enforce good code organization:
 
 ## TODO LIST
 
-1. Publish to [rubygems.org](https://rubygems.org), in order to be able to install directly as 'gem install boundary'
-2. Async calls through the facade?
-3. Check compatibility with old Ruby versions (probably, it will requite to get rid of dry-configurable)
-4. `has_use_case` and others should receive only classes (or lambdas as well, if appropriate settings are configured)
-5. Try to move to dry.rb libraries
-6. Add installer command so as to generate an initializer with explained configs in `config/initializers/` folder
+1. Think about separating use cases by roles (for ex: `as_admin { has_use_case :do_something }`
+2. Naming convention: namespace is a noun (as a domain area), while use case is a verb (as an action)) 
+2. Check possible edge cases with private constants, for example when we reference to `NyNamespace::Errors` or something
+2. Publish to [rubygems.org](https://rubygems.org), in order to be able to install directly as 'gem install boundary'
+3. Async calls through the facade?
+4. Check compatibility with old Ruby versions (probably, it will requite to get rid of dry-configurable)
+5. `has_use_case` and others should receive only classes (or lambdas as well, if appropriate settings are configured)
+6. Try to move to dry.rb libraries
+7. Add installer command so as to generate an initializer with explained configs in `config/initializers/` folder
 
 ## Contribution
 
